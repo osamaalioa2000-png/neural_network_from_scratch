@@ -4,7 +4,7 @@ from src.nn_framework import NN
 from src.data_generator import generate
 
 # Network Attributes:
-network_structure = [1, 20, 1]
+network_structure = [2, 20, 1]
 activation_function_type = 'tanh'
 
 # Network Training Parameters:
