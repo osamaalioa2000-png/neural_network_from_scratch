@@ -1,7 +1,7 @@
 import numpy as np
-from final_github import NN
-from data_generator_github import generate
 import matplotlib.pyplot as plt
+from src.nn_framework import NN
+from src.data_generator import generate
 
 # Network Attributes:
 network_structure = [1, 20, 1]
