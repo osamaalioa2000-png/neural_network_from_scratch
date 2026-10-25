@@ -1,22 +1,28 @@
 import numpy as np
 
 class NN:
-	def __init__(self, layer_sizes):
+	def __init__(self, layer_sizes, activation_func_type):
 		self.layer_num = len(layer_sizes)
 		self.layer_sizes = layer_sizes
+		self.activation_func_type = activation_func_type
 		rng = np.random.default_rng(42)
 		self.weights = [rng.random((layer_sizes[i], layer_sizes[i + 1])) for i in range(self.layer_num - 1)]
 		self.biases = [rng.random(layer_sizes[i]) for i in range(1, self.layer_num)]
 		
-	def activation_function(self, signals, function_type):
-		if function_type == 'sigmoid':
+	def activation_function(self, signals):
+		if self.activation_func_type == 'sigmoid':
 			return 1 / (1 + np.exp(-signals))
 			
-		if function_type == 'linear':
-			return signals
-			
-		if function_type == 'tanh':
+		if self.activation_func_type == 'tanh':
 			return (np.exp(signals) - np.exp(-signals)) / (np.exp(signals) + np.exp(-signals))
+			
+		
+	def derivative(self, signals):
+		if self.activation_func_type == 'sigmoid':
+			return signals * (1 - signals)
+			
+		if self.activation_func_type == 'tanh':
+			return (1 - np.power(signals, 2))
 			
 		
 	def forward_pass(self, input_layer, is_training=True):
@@ -25,7 +31,7 @@ class NN:
 			self.signals = [input_layer]
 			
 		for i in range(self.layer_num - 1):
-			current_layer = self.activation_function(current_layer @ self.weights[i] + self.biases[i], 'sigmoid')
+			current_layer = self.activation_function(current_layer @ self.weights[i] + self.biases[i])
 			if is_training:
 				self.signals.append(current_layer)
 				
@@ -33,12 +39,12 @@ class NN:
 		return current_layer
 		
 	def gradient(self, actual_output, target_output):
-		delta = np.array((actual_output - target_output) * actual_output * (1 - actual_output), ndmin=2).T
-		weight_grad = [np.einsum('ik,ij->kj', np.array(delta, ndmin=2), np.array(self.signals[-2], ndmin=2)).T]
+		delta = (actual_output - target_output) * self.derivative(actual_output)
+		weight_grad = [np.einsum('ik,ij->kj', delta, np.array(self.signals[-2], ndmin=2)).T]
 		bias_grad = [np.sum(delta, axis=0)]
 		for i in range(self.layer_num)[-2:0:-1]:
-			delta = np.array((delta @ self.weights[i].T) * self.signals[i] * (1 - self.signals[i]), ndmin=2)
-			weight_grad.append(np.einsum('ik,ij->kj', np.array(delta, ndmin=2), np.array(self.signals[i - 1], ndmin=2)).T)
+			delta = np.array((delta @ self.weights[i].T) * self.derivative(self.signals[i]), ndmin=2)
+			weight_grad.append(np.einsum('ik,ij->kj', delta, np.array(self.signals[i - 1], ndmin=2)).T)
 			bias_grad.append(np.sum(delta, axis=0))
 			
 		return weight_grad[::-1], bias_grad[::-1]
