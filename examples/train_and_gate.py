@@ -4,15 +4,13 @@ from src.nn_framework import NN
 from src.data_generator import generate
 
 # Network Attributes:
-network_structure = [1, 20, 1]
+network_structure = [2, 5, 1]
 activation_function_type = 'tanh'
 
 # Network Training Parameters:
-epochs = 10000
-learning_rate = 0.02
+epochs = 5000
+learning_rate = 0.05
 batch_size = 1
-data_size = 50
-training_data = 40
 
 # Data Generation:
 data = generate.and_gate()
