@@ -1,6 +1,5 @@
 import numpy as np
-from neural_network_github import NN
-# from final_github import NN
+from final_github import NN
 from data_generator_github import generate
 import matplotlib.pyplot as plt
 
@@ -37,7 +36,6 @@ post_training_output = nn.forward_pass(data[0], is_training=False)
 
 # Visualization
 fig, axes = plt.subplots(1, 2)
-
 axes[0].plot(data[0], data[1])
 axes[0].plot(data[0], pre_training_output)
 axes[0].legend(['Target Output', 'Network Output'])
