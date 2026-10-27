@@ -21,7 +21,7 @@ nn = NN(network_structure, activation_function_type)
 
 # Data Generation and Shuffling:
 data = generator.generate(simulated_function_type, data_size)
-shuffeled_indices = np.arange(data[0][0].shape[0])
+shuffeled_indices = np.arange(data[0].shape[0])
 np.random.seed(42)
 np.random.shuffle(shuffeled_indices)
 
