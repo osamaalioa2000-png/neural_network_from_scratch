@@ -10,7 +10,7 @@ activation_function_type = 'tanh'
 # Network Training Parameters
 simulated_function_type = 'cos'
 epochs = 3000
-learning_rate = 0.02
+learning_rate = 0.05
 batch_size = 1
 data_size = 64
 
