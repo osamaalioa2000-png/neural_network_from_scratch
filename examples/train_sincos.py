@@ -1,46 +1,78 @@
 import numpy as np
 import matplotlib.pyplot as plt
-from src.nn_framework import NN
-from src.data_generator import generate
+from nn_framework_g import NN
+from data_generator_g import generator
+import matplotlib.gridspec as gridspec
+
 
 # Network Attributes:
-network_structure = [2, 20, 1]
+network_structure = [2, 32, 32, 1]
 activation_function_type = 'tanh'
 
 # Network Training Parameters:
+simulated_function_type = 'sin*cos'
 epochs = 10000
-learning_rate = 0.02
+learning_rate = 0.005
 batch_size = 1
-data_size = 50
-training_data = 40
+data_size = 64
 
-# Data Generation:
-data = generate.sincos(data_size)
-shuffeled_indices = np.arange(data[0].shape[0])
+# Network Initialization
+nn = NN(network_structure, activation_function_type)
+
+# Data Generation and Shuffling:
+data = generator.generate(simulated_function_type, data_size)
+shuffeled_indices = np.arange(data[0][0].shape[0])
 np.random.seed(42)
 np.random.shuffle(shuffeled_indices)
 
-# Initialization
-nn = NN(network_structure, activation_function_type)
-pre_training_output = nn.forward_pass(np.sort(data[0]), is_training=False)
+test_data_size = 256
+test_data = generator.generate(simulated_function_type, test_data_size)
+pre_training_output = nn.forward_pass(test_data[0], is_training=False)
 
 # Training
 for epoch in range(epochs):
-	nn.train(data[0][shuffeled_indices][:training_data], data[1][shuffeled_indices][:training_data], learning_rate, batch_size)
+	nn.train(data[0], data[1], learning_rate, batch_size)
 	
-post_training_output = nn.forward_pass(data[0], is_training=False)
+
+# Validating Network Output With New A Input Data Set
+test_data_size = 256
+test_data = generator.generate(simulated_function_type, test_data_size)
+post_training_output = nn.forward_pass(test_data[0], is_training=False)
 
 # Visualization
-fig, axes = plt.subplots(1, 2)
-axes[0].plot(data[0][training_data:], data[1][training_data:])
-axes[0].plot(data[0][training_data:], pre_training_output[training_data:])
-axes[0].legend(['Target Output', 'Network Output'])
-axes[0].set_title('Pre-Training Output')
+fig = plt.figure(figsize=(12, 6))
+gs = gridspec.GridSpec(4, 3, figure=fig)
 
-axes[1].plot(data[0][training_data:], data[1][training_data:])
-axes[1].plot(data[0][training_data:], post_training_output[training_data:])
-axes[1].legend(['Target Output', 'Network Output'])
-axes[1].set_title('Post-Training Output')
+n = int(np.sqrt(test_data_size))
+x = test_data[0][:, 0].reshape(n, n)
+y = test_data[0][:, 1].reshape(n, n)
+
+axes = [[], [], []]
+axes[0].append(fig.add_subplot(gs[0:2, 0], projection='3d'))
+axes[0].append(fig.add_subplot(gs[0:2, 1], projection='3d'))
+axes[1].append(fig.add_subplot(gs[2:4, 0], projection='3d'))
+axes[1].append(fig.add_subplot(gs[2:4, 1], projection='3d'))
+axes[2].append(fig.add_subplot(gs[1:3, 2], projection='3d'))
+
+z_target = test_data[1].reshape(n, n)
+axes[1][0].set_title('Target Output')
+axes[1][0].plot_surface(x, y, z_target)
+
+z_network_pre = pre_training_output.reshape(n, n)
+axes[0][0].set_title('Network Output Before Training')
+axes[0][0].plot_surface(x, y, z_network_pre)
+
+z_target = test_data[1].reshape(n, n)
+axes[1][1].set_title('Target Output')
+axes[1][1].plot_surface(x, y, z_target)
+
+z_network_post = post_training_output.reshape(n, n)
+axes[0][1].set_title('Network Output After Training')
+axes[0][1].plot_surface(x, y, z_network_post)
+
+axes[2][0].plot_surface(x, y, z_target - z_network_post)
+axes[2][0].set_title('Post-Training Error Surface')
+axes[2][0].set_zlim(np.min(data[1]), np.max(data[1]))
 
 plt.tight_layout()
 plt.show()
