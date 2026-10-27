@@ -34,9 +34,7 @@ for epoch in range(epochs):
 	nn.train(data[0], data[1], learning_rate, batch_size)
 	
 
-# Validating Network Output With New A Input Data Set
-test_data_size = 256
-test_data = generator.generate(simulated_function_type, test_data_size)
+# Validation
 post_training_output = nn.forward_pass(test_data[0], is_training=False)
 
 # Visualization
