@@ -61,9 +61,6 @@ Generates example datasets for training and validation. Supported functions incl
 - `andgate`
 - `orgate`
 
-### `main.py`
-Runs the default sine-wave training example and plots the network output before and after training.
-
 ### `examples/`
 Contains standalone scripts for different learning tasks, such as:
 
@@ -81,14 +78,6 @@ pip install -r requirements.txt
 ```
 
 ## Running the Project
-
-### Run the main demo
-
-```bash
-python main.py
-```
-
-This trains a small network on a sine dataset and displays a before/after training comparison.
 
 ### Run an example script
 
