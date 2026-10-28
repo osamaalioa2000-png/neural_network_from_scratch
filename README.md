@@ -1,3 +1,4 @@
+![Neural Network diagram](docs/results/sine.png)
 # Neural Network from Scratch
 
 A compact, educational neural network implementation built only with NumPy. This project demonstrates how to implement a feed-forward neural network from scratch, train it with gradient descent, and fit simple mathematical functions and logical gates without relying on external ML libraries.
