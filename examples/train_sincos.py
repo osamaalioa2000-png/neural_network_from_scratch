@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.gridspec as gridspec
 from src.nn_framework import NN
-from src.data_generator import generate
+from src.data_generator import generator
 
 # Network Attributes:
 network_structure = [2, 32, 32, 1]

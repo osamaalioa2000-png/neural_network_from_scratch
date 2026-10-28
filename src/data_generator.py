@@ -1,14 +1,14 @@
 import numpy as np
 
 class generator:
-	def generate(func_type, data_size):
+	def generate(func_type, data_size=0):
 		if func_type == 'sin':
-			input_vec = np.array(np.linspace(-2 * np.pi, 2 * np.pi, data_size), ndmin=2).T
+			input_vec = np.array(np.linspace(-np.pi, np.pi, data_size), ndmin=2).T
 			output_vec = np.sin(input_vec)
 			return input_vec, output_vec
 			
 		elif func_type == 'cos':
-			input_vec = np.array(np.linspace(-2 * np.pi, 2 * np.pi, data_size), ndmin=2).T
+			input_vec = np.array(np.linspace(-np.pi, np.pi, data_size), ndmin=2).T
 			output_vec = np.cos(input_vec)
 			return input_vec, output_vec
 			

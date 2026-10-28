@@ -1,7 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from src.nn_framework import NN
-from src.data_generator import generate
+from src.data_generator import generator
 
 # Network Attributes
 network_structure = [1, 16, 1]

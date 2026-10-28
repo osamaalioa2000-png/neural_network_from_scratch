@@ -5,6 +5,7 @@ class NN:
 		self.layer_num = len(layer_sizes)
 		self.layer_sizes = layer_sizes
 		self.activation_func_type = activation_func_type
+		
 		rng = np.random.default_rng(42)
 		self.weights = [rng.random((layer_sizes[i], layer_sizes[i + 1])) * np.sqrt(1.0 / self.layer_sizes[i]) for i in range(self.layer_num - 1)]
 		self.biases = [rng.random(layer_sizes[i]) * np.sqrt(1.0 / self.layer_sizes[i - 1]) for i in range(1, self.layer_num)]

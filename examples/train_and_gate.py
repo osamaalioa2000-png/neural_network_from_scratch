@@ -1,7 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from src.nn_framework import NN
-from src.data_generator import generate
+from src.data_generator import generator
 
 # Network Attributes:
 network_structure = [2, 4, 1]
@@ -17,7 +17,7 @@ batch_size = 1
 nn = NN(network_structure, activation_function_type)
 
 # Data Generation:
-data = generator.generate(simulated_function_type, data_size)
+data = generator.generate(simulated_function_type)
 shuffeled_indices = np.arange(data[0].shape[0])
 np.random.seed(42)
 np.random.shuffle(shuffeled_indices)
