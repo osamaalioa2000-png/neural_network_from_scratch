@@ -28,16 +28,11 @@ neural_network_from_scratch/
 │   ├── __init__.py
 │   ├── nn_framework.py
 │   └── data_generator.py
-├── examples/
-│   ├── train_sin.py
-│   ├── train_cos.py
-│   ├── train_sincos.py
-│   ├── train_and_gate.py
-│   └── __init__.py
-├── docs/
-│   └── architecture.md
-└── tests/
-    └── test_neural_network.py
+└── examples/
+    ├── train_sin.py
+    ├── train_cos.py
+    ├── train_sincos.py
+    └── train_and_gate.py
 ```
 
 ## Core Components
@@ -69,14 +64,17 @@ Contains standalone scripts for different learning tasks, such as:
 - AND gate learning
 
 ### `results/`
-contains training results from the examples
+Contains the training results of the example scripts:
 
 ## sin(x)
 ![Neural Network diagram](results/sine.png)
+
 ## cos(x)
 ![Neural Network diagram](results/cosine.png)
+
 ## sin(x)*cos(y)
 ![Neural Network diagram](results/sincos.png)
+
 ## AND(x, y)
 | x | y | Target Output | Network Output |
 |------:|--------:|------:|--------:|
