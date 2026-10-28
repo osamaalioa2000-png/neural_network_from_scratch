@@ -1,4 +1,3 @@
-![Neural Network diagram](docs/results/sine.png)
 # Neural Network from Scratch
 
 A compact, educational neural network implementation built only with NumPy. This project demonstrates how to implement a feed-forward neural network from scratch, train it with gradient descent, and fit simple mathematical functions and logical gates without relying on external ML libraries.
@@ -69,6 +68,23 @@ Contains standalone scripts for different learning tasks, such as:
 - cosine regression
 - sine-cosine surface fitting
 - AND gate learning
+
+### `results/`
+contains training results from the examples
+
+## sin(x)
+![Neural Network diagram](results/sine.png)
+## cos(x)
+![Neural Network diagram](results/cosine.png)
+## sin(x)*cos(y)
+![Neural Network diagram](results/sincos.png)
+## AND(x,y)
+| x | y | Target Output | Network Output |
+|------:|--------:|------:|--------:|
+| 0 | 0 | 0 | 0.00250893 |
+| 0 | 1 | 0 | 0.05294365 |
+| 1 | 0 | 0 | 0.05297154 |
+| 1 | 1 | 1 | 0.92694488 |
 
 ## Installation
 
