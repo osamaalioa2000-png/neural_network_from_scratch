@@ -24,7 +24,6 @@ neural_network_from_scratch/
 ├── requirements.txt
 ├── setup.py
 ├── .gitignore
-├── main.py
 ├── src/
 │   ├── __init__.py
 │   ├── nn_framework.py
@@ -78,7 +77,7 @@ contains training results from the examples
 ![Neural Network diagram](results/cosine.png)
 ## sin(x)*cos(y)
 ![Neural Network diagram](results/sincos.png)
-## AND(x,y)
+## AND(x, y)
 | x | y | Target Output | Network Output |
 |------:|--------:|------:|--------:|
 | 0 | 0 | 0 | 0.00250893 |
