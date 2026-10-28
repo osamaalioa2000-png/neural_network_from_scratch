@@ -1,9 +1,8 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.gridspec as gridspec
-from nn_framework_g import NN
-from data_generator_g import generator
-
+from src.nn_framework import NN
+from src.data_generator import generate
 
 # Network Attributes:
 network_structure = [2, 32, 32, 1]
