@@ -4,7 +4,7 @@ from src.nn_framework import NN
 from src.data_generator import generate
 
 # Network Attributes:
-network_structure = [2, 5, 1]
+network_structure = [2, 4, 1]
 activation_function_type = 'sigmoid'
 
 # Network Training Parameters:
